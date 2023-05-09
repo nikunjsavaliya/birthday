@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700');
+@font-face {
+    font-family: 'BerkshireSwashRegular';
+    src: url('../fonts/BerkshireSwashRegular.eot');
+    src: url('../fonts/BerkshireSwashRegular.eot') format('embedded-opentype'),
+         url('../fonts/BerkshireSwashRegular.woff2') format('woff2'),
+         url('../fonts/BerkshireSwashRegular.woff') format('woff'),
+         url('../fonts/BerkshireSwashRegular.ttf') format('truetype'),
+         url('../fonts/BerkshireSwashRegular.svg#BerkshireSwashRegular') format('svg');
+}
+
+#capture {
+    margin: 0 auto;
+    width: 360px;
+    height: 720px;
+    overflow: hidden;
+    position: relative;
+}
+
+textarea:focus {
+    outline: 0;
+}
+
+textarea {
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    text-align: center;
+    color: #ff0000;
+    font-weight: 700;
+    font-size: 24px !important;
+    resize: none;
+    overflow: hidden;
+    max-height: 100%;
+    min-height: auto;
+    top: 83%;
+    position: absolute;
+    left: 0;
+    height: 30px;
+    line-height: 1 !important;
+    font-family: 'BerkshireSwashRegular' !important;
+}
+
+.two {    
+    color: #333;
+    font-size: 18px !important;
+    top: 88%;
+    height: 30px;
+    font-family: 'Arial' !important;
+}
+
+@media screen and (max-width: 1024px) {
+    #capture {
+        max-width: 100%;
+    }
+
+    .bg-info {
+        background-size: 100% !important;
+    }
+}
