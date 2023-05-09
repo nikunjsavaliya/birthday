@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HTML TO IMAGE</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/background.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Btn to trigger action -->
+        <a href="#" class="btn btn-block btn-primary mb-3" id="btnDownload">Download</a>
+      
+        <!-- Content to capture -->
+        <div id="capture" class="text-center bg-info align-middle">
+          <textarea maxlength="110">Click to edit...</textarea>
+          <textarea class="two" maxlength="110">Click to edit...</textarea>
+        </div>
+      </div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+<script>
+    function download(url){
+    var a = $("<a style='display:none' id='js-downloder'>")
+    .attr("href", url)
+    .attr("download", "test.png")
+    .appendTo("body");
+  
+    a[0].click();
+  
+    a.remove();
+  }
+  
+  function saveCapture(element) {
+    html2canvas(element).then(function(canvas) {
+      download(canvas.toDataURL("image/png"));
+    })
+  }
+  
+  $('#btnDownload').click(function(){
+    var element = document.querySelector("#capture");
+    saveCapture(element)
+  })
+  </script>
+</html>
