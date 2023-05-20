@@ -14829,7 +14829,7 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
 
   function downloadSVGAsPNG(e){
     const canvas = document.createElement("canvas");
-    const svg = document.getElementById(e.target.id);
+    const svg = document.getElementById(e.target.parentElement.id);
     const base64doc = btoa(unescape(encodeURIComponent(svg.outerHTML)));
     const w = parseInt(svg.getAttribute('width'));
     const h = parseInt(svg.getAttribute('height'));
