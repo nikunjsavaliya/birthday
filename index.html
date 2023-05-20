@@ -14664,9 +14664,11 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
       context.drawImage(img_to_download, 0, 0, w, h);
       const dataURL = canvas.toDataURL('image/png');
       if (window.navigator.msSaveBlob) {
+        console.log('IF DOWNLOAD');
         window.navigator.msSaveBlob(canvas.msToBlob(), "download.png");
         e.preventDefault();
       } else {
+        console.log('ELSE DOWNLOAD');
         const a = document.createElement('a');
         const my_evt = new MouseEvent('click');
         a.download = 'download.png';
