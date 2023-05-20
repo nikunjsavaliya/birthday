@@ -14664,7 +14664,7 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
       context.drawImage(img_to_download, 0, 0, w, h);
       var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
       const dataURL = canvas.toDataURL('image/png');
-      const blob = new Blob([imageData], { type: 'image/png' });
+      const blob = new Blob(imageData);
       if (window.navigator.msSaveBlob) {
         console.log('IF DOWNLOAD');
         window.navigator.msSaveBlob(canvas.msToBlob(), "download.png");
@@ -14698,7 +14698,7 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
       //context.clearRect(0, 0, w, h);
       context.drawImage(img_to_download, 0, 0, w, h);
       const dataURL = canvas.toDataURL('image/png');
-      const blob = new Blob([dataURL], { type: 'image/png' });
+      const blob = new Blob([dataURL]);
       if (window.navigator.msSaveBlob) {
         window.navigator.msSaveBlob(canvas.msToBlob(), "download.png");
         e.preventDefault();
