@@ -14637,7 +14637,7 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
           </div>
         </div>
         <section>
-          <a id="download" href=""><img id="output" alt="" /></a>        
+          <a id="download" href=""><img id="output" alt="" style="display:none;"/></a>        
         </section>
       </div>
     </div>
@@ -14707,7 +14707,10 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
         const a = document.querySelector('#download');
         a.download = 'download.png';
         a.href = dataURL;
-        a.click();
+        a.focus();
+        setTimeout(function(){
+          a.click();
+        },100);
     });
 
     image.src = svgDataUrl;
