@@ -14672,7 +14672,7 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
           a.style = "display: none";
           var csvUrl = URL.createObjectURL(csvData);
           a.href =  csvUrl;
-          a.download = file_name;
+          a.download = 'download.png';
           a.click();
           URL.revokeObjectURL(a.href)
           a.remove();
@@ -14724,7 +14724,7 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
         canvas.toBlob(function(blob){
           a.href = URL.createObjectURL(blob);
           console.log(blob);
-          console.log(link.href); // this line should be here
+          console.log(a.href); // this line should be here
         },'image/png');
         
         //a.href = dataURL;
