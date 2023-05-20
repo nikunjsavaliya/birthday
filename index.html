@@ -14636,6 +14636,9 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
             <button class="download-btn" id="downloadPNGBlank">Download</button>
           </div>
         </div>
+        <section>
+          <img id="output" alt="" />        
+        </section>
       </div>
     </div>
   </div>
@@ -14646,38 +14649,64 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
 <script src="js/bootstrap.min.js"></script>
 <script>
   function downloadSVGAsPNGFriend(e) {
-    const canvas = document.createElement("canvas");
-    const svg = document.querySelector('#Friend');
-    console.log('svg', svg)
-    const base64doc = btoa(unescape(encodeURIComponent(svg.outerHTML)));
-    const w = parseInt(svg.getAttribute('width'));
-    const h = parseInt(svg.getAttribute('height'));
-    const img_to_download = document.createElement('img');
-    img_to_download.src = 'data:image/svg+xml;base64,' + base64doc;
-    console.log(w, h);
-    img_to_download.onload = function () {
-      console.log('img loaded');
-      canvas.setAttribute('width', w);
-      canvas.setAttribute('height', h);
-      const context = canvas.getContext("2d");
-      //context.clearRect(0, 0, w, h);
-      context.drawImage(img_to_download, 0, 0, w, h);
-      const content = canvas.toDataURL('image/png');
-      var csvData = new Blob([content], { type: 'image/png' });
-      if (window.navigator && window.navigator.msSaveOrOpenBlob) { // for IE
-          window.navigator.msSaveOrOpenBlob(csvData, file_name);
-      } else { // for Non-IE (chrome, firefox etc.)
-          var a = document.createElement("a");
-          document.body.appendChild(a);
-          a.style = "display: none";
-          var csvUrl = URL.createObjectURL(csvData);
-          a.href =  csvUrl;
-          a.download = 'download.png';
-          a.click();
-          URL.revokeObjectURL(a.href)
-          a.remove();
-      }
-      
+//     const canvas = document.createElement("canvas");
+//     const svg = document.querySelector('#Friend');
+//     console.log('svg', svg)
+//     const base64doc = btoa(unescape(encodeURIComponent(svg.outerHTML)));
+//     const w = parseInt(svg.getAttribute('width'));
+//     const h = parseInt(svg.getAttribute('height'));
+//     const img_to_download = document.createElement('img');
+//     img_to_download.src = 'data:image/svg+xml;base64,' + base64doc;
+//     console.log(w, h);
+//     img_to_download.onload = function () {
+//       console.log('img loaded');
+//       canvas.setAttribute('width', w);
+//       canvas.setAttribute('height', h);
+//       const context = canvas.getContext("2d");
+//       //context.clearRect(0, 0, w, h);
+//       context.drawImage(img_to_download, 0, 0, w, h);
+//       const content = canvas.toDataURL('image/png');
+//       var csvData = new Blob([content], { type: 'image/png' });
+//       if (window.navigator && window.navigator.msSaveOrOpenBlob) { // for IE
+//           window.navigator.msSaveOrOpenBlob(csvData, file_name);
+//       } else { // for Non-IE (chrome, firefox etc.)
+//           var a = document.createElement("a");
+//           document.body.appendChild(a);
+//           a.style = "display: none";
+//           var csvUrl = URL.createObjectURL(csvData);
+//           a.href =  csvUrl;
+//           a.download = 'download.png';
+//           a.click();
+//           URL.revokeObjectURL(a.href)
+//           a.remove();
+//       }
+    
+    const output = document.querySelector("#output");
+    const input = document.querySelector('#Friend');
+
+    const svgData = new XMLSerializer().serializeToString(input);
+    const base64doc = btoa(unescape(encodeURIComponent(svgData)));
+    const svgDataUrl = 'data:image/svg+xml;charset=utf-8;base64,' + base64doc;
+
+    const image = new Image();
+
+    image.addEventListener('load',function(){
+        const width = input.getAttribute("width");
+        const height = input.getAttribute("height");
+        const canvas = document.createElement("canvas");
+
+        canvas.setAttribute('width', width);
+        canvas.setAttribute('height', height);
+
+        const context = canvas.getContext("2d");
+        context.drawImage(image, 0, 0, width, height);
+
+        const dataURL = canvas.toDataURL('image/png');
+        output.src = dataURL;
+    });
+
+    image.src = svgDataUrl;
+    
 //      var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 //      const dataURL = canvas.toDataURL('image/png');
 //       if (window.navigator.msSaveBlob) {
