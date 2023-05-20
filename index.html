@@ -14663,21 +14663,20 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
       //context.clearRect(0, 0, w, h);
       context.drawImage(img_to_download, 0, 0, w, h);
       var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      const dataURL = canvas.toDataURL('image/png');
-      if (window.navigator.msSaveBlob) {
-        console.log('IF DOWNLOAD');
-        window.navigator.msSaveBlob(canvas.msToBlob(), "download.png");
-        e.preventDefault();
-      } else {
-        console.log('ELSE DOWNLOAD');
-        setTimeout(function(){
-          const a = document.createElement('a');
-          const my_evt = new MouseEvent('click');
-          a.download = 'download.png';
-          a.href = dataURL;
-          a.dispatchEvent(my_evt);
-        },2000);
-      }
+      const dataURL = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream"); //Convert image to 'octet-stream' (Just a download, really)
+      window.location.href = image;
+//       if (window.navigator.msSaveBlob) {
+//         console.log('IF DOWNLOAD');
+//         window.navigator.msSaveBlob(canvas.msToBlob(), "download.png");
+//         e.preventDefault();
+//       } else {
+//         console.log('ELSE DOWNLOAD');
+//         const a = document.createElement('a');
+//         const my_evt = new MouseEvent('click');
+//         a.download = 'download.png';
+//         a.href = dataURL;
+//         a.dispatchEvent(my_evt);
+//       }
     }
   }
 
