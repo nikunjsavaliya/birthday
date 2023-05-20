@@ -14725,7 +14725,9 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
           a.href = URL.createObjectURL(blob);
           console.log(blob);
           console.log(a.href); // this line should be here
-          a.click();
+          setTimeout(function(){
+            a.click();
+          },1000);
         },'image/png');
         
         //a.href = dataURL;
@@ -14856,7 +14858,7 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
   }
   
   const downloadPNGFriend = document.querySelector('#downloadPNGFriend');
-  downloadPNGFriend.addEventListener('click', downloadSVGAsPNGFriend);
+  downloadPNGFriend.addEventListener('click', downloadSVGAsPNG);
 
   const downloadPNGElder = document.querySelector('#downloadPNGElder');
   downloadPNGElder.addEventListener('click', downloadSVGAsPNGElder);
