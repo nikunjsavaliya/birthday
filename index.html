@@ -14676,7 +14676,7 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
           a.download = 'download.png';
           a.href = dataURL;
           a.dispatchEvent(my_evt);
-        },500);
+        },2000);
       }
     }
   }
@@ -14698,6 +14698,7 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
       const context = canvas.getContext("2d");
       //context.clearRect(0, 0, w, h);
       context.drawImage(img_to_download, 0, 0, w, h);
+      var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
       const dataURL = canvas.toDataURL('image/png');
       if (window.navigator.msSaveBlob) {
         window.navigator.msSaveBlob(canvas.msToBlob(), "download.png");
@@ -14707,7 +14708,7 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
           const a = document.createElement('a');
           const my_evt = new MouseEvent('click');
           a.download = 'download.png';
-          a.href = dataURL;
+          a.href = imageData;
           a.dispatchEvent(my_evt);
         },500);
       }
