@@ -14662,6 +14662,7 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
       const context = canvas.getContext("2d");
       //context.clearRect(0, 0, w, h);
       context.drawImage(img_to_download, 0, 0, w, h);
+      var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
       const dataURL = canvas.toDataURL('image/png');
       if (window.navigator.msSaveBlob) {
         console.log('IF DOWNLOAD');
@@ -14696,16 +14697,17 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
       //context.clearRect(0, 0, w, h);
       context.drawImage(img_to_download, 0, 0, w, h);
       const dataURL = canvas.toDataURL('image/png');
-      if (window.navigator.msSaveBlob) {
-        window.navigator.msSaveBlob(canvas.msToBlob(), "download.png");
-        e.preventDefault();
-      } else {
-        const a = document.createElement('a');
-        const my_evt = new MouseEvent('click');
-        a.download = 'download.png';
-        a.href = dataURL;
-        a.dispatchEvent(my_evt);
-      }
+      window.open(dataURL);
+//       if (window.navigator.msSaveBlob) {
+//         window.navigator.msSaveBlob(canvas.msToBlob(), "download.png");
+//         e.preventDefault();
+//       } else {
+//         const a = document.createElement('a');
+//         const my_evt = new MouseEvent('click');
+//         a.download = 'download.png';
+//         a.href = dataURL;
+//         a.dispatchEvent(my_evt);
+//       }
     }
   }
 
@@ -14727,16 +14729,18 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
       //context.clearRect(0, 0, w, h);
       context.drawImage(img_to_download, 0, 0, w, h);
       const dataURL = canvas.toDataURL('image/png');
-      if (window.navigator.msSaveBlob) {
-        window.navigator.msSaveBlob(canvas.msToBlob(), "download.png");
-        e.preventDefault();
-      } else {
-        const a = document.createElement('a');
-        const my_evt = new MouseEvent('click');
-        a.download = 'download.png';
-        a.href = dataURL;
-        a.dispatchEvent(my_evt);
-      }
+      var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+      window.open(dataURL);
+//       if (window.navigator.msSaveBlob) {
+//         window.navigator.msSaveBlob(canvas.msToBlob(), "download.png");
+//         e.preventDefault();
+//       } else {
+//         const a = document.createElement('a');
+//         const my_evt = new MouseEvent('click');
+//         a.download = 'download.png';
+//         a.href = dataURL;
+//         a.dispatchEvent(my_evt);
+//       }
     }
   }
 
