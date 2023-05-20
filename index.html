@@ -14664,6 +14664,7 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
       context.drawImage(img_to_download, 0, 0, w, h);
       var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
       const dataURL = canvas.toDataURL('image/png');
+      const blob = new Blob([imageData], { type: 'image/png' });
       if (window.navigator.msSaveBlob) {
         console.log('IF DOWNLOAD');
         window.navigator.msSaveBlob(canvas.msToBlob(), "download.png");
@@ -14673,7 +14674,7 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
         const a = document.createElement('a');
         const my_evt = new MouseEvent('click');
         a.download = 'download.png';
-        a.href = dataURL;
+        a.href = window.URL.createObjectURL(blob);//dataURL;
         a.dispatchEvent(my_evt);
       }
     }
@@ -14697,17 +14698,17 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
       //context.clearRect(0, 0, w, h);
       context.drawImage(img_to_download, 0, 0, w, h);
       const dataURL = canvas.toDataURL('image/png');
-      window.open(dataURL, '_blank');
-//       if (window.navigator.msSaveBlob) {
-//         window.navigator.msSaveBlob(canvas.msToBlob(), "download.png");
-//         e.preventDefault();
-//       } else {
-//         const a = document.createElement('a');
-//         const my_evt = new MouseEvent('click');
-//         a.download = 'download.png';
-//         a.href = dataURL;
-//         a.dispatchEvent(my_evt);
-//       }
+      const blob = new Blob([dataURL], { type: 'image/png' });
+      if (window.navigator.msSaveBlob) {
+        window.navigator.msSaveBlob(canvas.msToBlob(), "download.png");
+        e.preventDefault();
+      } else {
+        const a = document.createElement('a');
+        const my_evt = new MouseEvent('click');
+        a.download = 'download.png';
+        a.href = window.URL.createObjectURL(blob);
+        a.dispatchEvent(my_evt);
+      }
     }
   }
 
