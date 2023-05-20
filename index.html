@@ -14841,27 +14841,25 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
       const context = canvas.getContext("2d");
       context.drawImage(img_to_download, 0, 0, w, h);
       const dataURL = canvas.toDataURL('image/png');
-      if (window.navigator.msSaveBlob) {
-        window.navigator.msSaveBlob(canvas.msToBlob(), "download.png");
-        e.preventDefault();
-      } else {
-        const a = document.createElement('a');
-        a.download = 'download.png';
-        
-        canvas.toBlob(function(blob){
-          a.href = URL.createObjectURL(blob);
-          a.click();
-        },'image/png');
-        
-      }
+      
+      const a = document.createElement('a');
+      a.download = 'download.png';
+
+      canvas.toBlob(function(blob){
+        a.href = URL.createObjectURL(blob);
+        console.log(blob);
+        console.log(a.href); // this line should be here
+        a.click();
+      },'image/png');
+       
     }
   }
   
   const downloadPNGFriend = document.querySelector('#downloadPNGFriend');
-  downloadPNGFriend.addEventListener('click', downloadSVGAsPNG);
+  downloadPNGFriend.addEventListener('click', downloadSVGAsPNGFriend);
 
   const downloadPNGElder = document.querySelector('#downloadPNGElder');
-  downloadPNGElder.addEventListener('click', downloadSVGAsPNG);
+  downloadPNGElder.addEventListener('click', downloadSVGAsPNGElder);
 
   const downloadPNGBhoolku = document.querySelector('#downloadPNGBhoolku');
   downloadPNGBhoolku.addEventListener('click', downloadSVGAsPNG);
