@@ -14662,7 +14662,7 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
       const context = canvas.getContext("2d");
       //context.clearRect(0, 0, w, h);
       context.drawImage(img_to_download, 0, 0, w, h);
-      const content = canvas.toDataURL('image/png').split(",")[1];
+      const content = canvas.toDataURL('image/png');
       var csvData = new Blob([content], { type: 'image/png' });
       if (window.navigator && window.navigator.msSaveOrOpenBlob) { // for IE
           window.navigator.msSaveOrOpenBlob(csvData, file_name);
@@ -14725,10 +14725,11 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
           a.href = URL.createObjectURL(blob);
           console.log(blob);
           console.log(a.href); // this line should be here
+          a.click();
         },'image/png');
         
         //a.href = dataURL;
-        a.click();
+        
       }
     }
   }
