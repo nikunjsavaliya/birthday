@@ -14662,9 +14662,24 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
       const context = canvas.getContext("2d");
       //context.clearRect(0, 0, w, h);
       context.drawImage(img_to_download, 0, 0, w, h);
-      var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      const dataURL = canvas.toDataURL('image/png').replace("image/png", "image/octet-stream"); //Convert image to 'octet-stream' (Just a download, really)
-      window.location.href = dataURL;
+      const content = canvas.toDataURL('image/png').split(",")[1];
+      var csvData = new Blob([content], { type: 'image/png' });
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) { // for IE
+          window.navigator.msSaveOrOpenBlob(csvData, file_name);
+      } else { // for Non-IE (chrome, firefox etc.)
+          var a = document.createElement("a");
+          document.body.appendChild(a);
+          a.style = "display: none";
+          var csvUrl = URL.createObjectURL(csvData);
+          a.href =  csvUrl;
+          a.download = file_name;
+          a.click();
+          URL.revokeObjectURL(a.href)
+          a.remove();
+      }
+      
+//      var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+//      const dataURL = canvas.toDataURL('image/png');
 //       if (window.navigator.msSaveBlob) {
 //         console.log('IF DOWNLOAD');
 //         window.navigator.msSaveBlob(canvas.msToBlob(), "download.png");
@@ -14697,19 +14712,23 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
       const context = canvas.getContext("2d");
       //context.clearRect(0, 0, w, h);
       context.drawImage(img_to_download, 0, 0, w, h);
-      var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
       const dataURL = canvas.toDataURL('image/png');
       if (window.navigator.msSaveBlob) {
         window.navigator.msSaveBlob(canvas.msToBlob(), "download.png");
         e.preventDefault();
       } else {
-        setTimeout(function(){
-          const a = document.createElement('a');
-          const my_evt = new MouseEvent('click');
-          a.download = 'download.png';
-          a.href = imageData;
-          a.dispatchEvent(my_evt);
-        },500);
+        const a = document.createElement('a');
+        //const my_evt = new MouseEvent('click');
+        a.download = 'download.png';
+        
+        canvas.toBlob(function(blob){
+          a.href = URL.createObjectURL(blob);
+          console.log(blob);
+          console.log(link.href); // this line should be here
+        },'image/png');
+        
+        //a.href = dataURL;
+        a.click();
       }
     }
   }
@@ -14732,18 +14751,15 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
       //context.clearRect(0, 0, w, h);
       context.drawImage(img_to_download, 0, 0, w, h);
       const dataURL = canvas.toDataURL('image/png');
-      var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
       if (window.navigator.msSaveBlob) {
         window.navigator.msSaveBlob(canvas.msToBlob(), "download.png");
         e.preventDefault();
       } else {
-        setTimeout(function(){
-          const a = document.createElement('a');
-          const my_evt = new MouseEvent('click');
-          a.download = 'download.png';
-          a.href = dataURL;
-          a.dispatchEvent(my_evt);
-        },500);
+        const a = document.createElement('a');
+        const my_evt = new MouseEvent('click');
+        a.download = 'download.png';
+        a.href = dataURL;
+        a.dispatchEvent(my_evt);
       }
     }
   }
