@@ -14637,7 +14637,7 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
           </div>
         </div>
         <section>
-          <img id="output" alt="" />        
+          <a id="download" href=""><img id="output" alt="" /></a>        
         </section>
       </div>
     </div>
@@ -14703,6 +14703,11 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
 
         const dataURL = canvas.toDataURL('image/png');
         output.src = dataURL;
+      
+        const a = document.querySelector('#download');
+        a.download = 'download.png';
+        a.href = dataURL;
+        a.click();
     });
 
     image.src = svgDataUrl;
@@ -14721,7 +14726,7 @@ zAzlxMBT6QwACkIACAzp/Or/ABL3gU/nV/iXvAB//9k=">
 //         a.href = dataURL;
 //         a.dispatchEvent(my_evt);
 //       }
-    }
+//    }
   }
 
   function downloadSVGAsPNGElder(e) {
