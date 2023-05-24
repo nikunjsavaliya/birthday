@@ -1,0 +1,68 @@
+<div id="svg-container">
+    <svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+        <style>
+            @font-face {
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 300;
+                font-display: swap;
+                src: url(data:font/truetype;charset=utf-8;base64,AAEAAAASAQAABAAgR0RFRnBqbY4AAaOkAAAB6kdQT1PZc2ujAAGlkAAATrpHU1VC0HjTzgAB9EwAAAoCT1MvMpcesZEA...)
+            }
+
+            @font-face {
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 900;
+                font-display: swap;
+                src: url(data:font/truetype;charset=utf-8;base64,AAEAAAASAQAABAAgR0RFRnBqbY4AAaAMAAAB6kdQT1MfGyUBAAGh+AAAVhxHU1VC0HjTzgAB+BQAAAoCT1MvMpl2sdgA...)
+            }
+
+            .subhead {
+                fill: #C2F7EB;
+                font-family: Roboto;
+                font-weight: 300;
+                font-size: 60px;
+                text-transform: uppercase;
+            }
+
+            .title {
+                fill: #F72585;
+                font-family: Roboto;
+                font-weight: 900;
+                font-size: 144px;
+            }
+        </style>
+        <g clip-path="url(#clip0)">
+            <rect width="1920" height="1080" fill="white" />
+            <rect width="1920" height="1080" fill="#1B1725" />
+            <text x="77" y="250" class="subhead">Ruby Metaprogramming</text>
+            <text x="77" y="420" class="title">Nikunj</text>
+        </g>
+        <defs>
+            <clipPath id="clip0">
+                <rect width="1920" height="1080" fill="white" />
+            </clipPath>
+        </defs>
+    </svg>
+</div>
+
+<canvas style="display: none;" id="canvas" width="1920" height="1080"></canvas>
+<div id="png-container"></div>
+
+<script>
+    var svgString = new XMLSerializer().serializeToString(document.querySelector('svg'));
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    var DOMURL = self.URL || self.webkitURL || self;
+    var img = new Image();
+    var svg = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+    var url = DOMURL.createObjectURL(svg);
+    img.onload = function () {
+        ctx.drawImage(img, 0, 0);
+        var png = canvas.toDataURL("image/png");
+        document.querySelector('#png-container').innerHTML = '<img src="' + png + '"/>';
+        DOMURL.revokeObjectURL(png);
+    };
+    img.src = url;
+</script>
