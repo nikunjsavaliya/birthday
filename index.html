@@ -157,16 +157,21 @@
       var a = document.createElement("a");
       a.href = png;
       a.download = "Happy-Birthday.png";
+      a.textContent = "Click here to download the image";
 
-      if (navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/)) {
-        var newWindow = window.open();
-        newWindow.location.href = a.href;
+      // Check if the user is using iOS Safari
+      var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      if (isIOS) {
+        // Display the download link to the user
+        document.body.appendChild(a);
       } else {
+        // Trigger the download automatically
         a.click();
       }
     };
     img.src = url;
   }
+  
   
   /*function CreateImageFriend() {
     var svgString = new XMLSerializer().serializeToString(document.querySelector('#Friend'));
