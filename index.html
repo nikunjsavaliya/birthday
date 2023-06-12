@@ -141,36 +141,44 @@
 
 <script>
   function CreateImageFriend() {
-    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Friend'));
-    var canvas = document.getElementById("canvasfriend");
-    var ctx = canvas.getContext("2d");
-    var DOMURL = self.URL || self.webkitURL || self;
-    var img = new Image();
-    var svg = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-    var url = DOMURL.createObjectURL(svg);
-    img.onload = function () {
-      ctx.drawImage(img, 0, 0);
-      var png = canvas.toDataURL("image/png");
-      document.querySelector('#png-friend').innerHTML = '<img src="' + png + '"/>';
-      DOMURL.revokeObjectURL(png);
+  var svgString = new XMLSerializer().serializeToString(document.querySelector('#Friend'));
+  var canvas = document.createElement("canvas");
+  canvas.width = 500; // Set the desired width of the canvas
+  canvas.height = 500; // Set the desired height of the canvas
+  var ctx = canvas.getContext("2d");
+  var DOMURL = window.URL || window.webkitURL || window;
+  
+  var img = new Image();
+  var svg = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+  var url = DOMURL.createObjectURL(svg);
+  
+  img.onload = function () {
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    
+    var png;
+    if (navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i)) {
+      // Convert canvas to PNG on iOS devices
+      var tempCanvas = document.createElement("canvas");
+      tempCanvas.width = canvas.width;
+      tempCanvas.height = canvas.height;
+      var tempCtx = tempCanvas.getContext("2d");
+      tempCtx.drawImage(canvas, 0, 0);
+      png = tempCanvas.toDataURL("image/png");
+    } else {
+      png = canvas.toDataURL("image/png");
+    }
+    
+    document.querySelector('#png-friend').innerHTML = '<img src="' + png + '"/>';
+    DOMURL.revokeObjectURL(png);
 
-      var a = document.createElement("a");
-      a.href = png;
-      a.download = "Happy-Birthday.png";
-      a.textContent = "Click here to download the image";
-
-      // Check if the user is using iOS Safari
-      var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-      if (isIOS) {
-        // Display the download link to the user
-        document.body.appendChild(a);
-      } else {
-        // Trigger the download automatically
-        a.click();
-      }
-    };
-    img.src = url;
-  }
+    var a = document.createElement("a");
+    a.href = png;
+    a.download = "Happy-Birthday.png";
+    a.click();
+  };
+  
+  img.src = url;
+}
   
   
   /*function CreateImageFriend() {
