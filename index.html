@@ -157,10 +157,38 @@
       var a = document.createElement("a");
       a.href = png;
       a.download = "Happy-Birthday.png";
-      a.click();
+
+      if (navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/)) {
+        var newWindow = window.open();
+        newWindow.location.href = a.href;
+      } else {
+        a.click();
+      }
     };
     img.src = url;
   }
+  
+  /*function CreateImageFriend() {
+    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Friend'));
+    var canvas = document.getElementById("canvasfriend");
+    var ctx = canvas.getContext("2d");
+    var DOMURL = self.URL || self.webkitURL || self;
+    var img = new Image();
+    var svg = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+    var url = DOMURL.createObjectURL(svg);
+    img.onload = function () {
+      ctx.drawImage(img, 0, 0);
+      var png = canvas.toDataURL("image/png");
+      document.querySelector('#png-friend').innerHTML = '<img src="' + png + '"/>';
+      DOMURL.revokeObjectURL(png);
+
+      var a = document.createElement("a");
+      a.href = png;
+      a.download = "Happy-Birthday.png";
+      a.click();
+    };
+    img.src = url;
+  }*/
 
   function CreateImageElder() {
     var svgString = new XMLSerializer().serializeToString(document.querySelector('#Elder'));
