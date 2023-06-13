@@ -192,6 +192,33 @@
 
   function CreateImageElder() {
     var svgString = new XMLSerializer().serializeToString(document.querySelector('#Elder'));
+    var canvas = document.createElement('canvas');
+    canvas.width = 1080; // Set desired width
+    canvas.height = 1920; // Set desired height
+    var ctx = canvas.getContext('2d');
+
+    var image = new Image();
+    image.onload = function () {
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      var png = canvas.toDataURL('image/png');
+
+      var a = document.createElement('a');
+      a.href = png;
+      a.download = 'Happy-Birthday.png';
+
+      if (document.createEvent) {
+        var event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        a.dispatchEvent(event);
+      } else {
+        a.click();
+      }
+    };
+    image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+  }
+  
+  /*function CreateImageElder() {
+    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Elder'));
     var canvas = document.getElementById("canvaselder");
     var ctx = canvas.getContext("2d");
     var DOMURL = self.URL || self.webkitURL || self;
@@ -210,9 +237,34 @@
       a.click();
     };
     img.src = url;
-  }
-
+  }*/
   function CreateImageBhoolku() {
+    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Bhoolku'));
+    var canvas = document.createElement('canvas');
+    canvas.width = 1080; // Set desired width
+    canvas.height = 1920; // Set desired height
+    var ctx = canvas.getContext('2d');
+
+    var image = new Image();
+    image.onload = function () {
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      var png = canvas.toDataURL('image/png');
+
+      var a = document.createElement('a');
+      a.href = png;
+      a.download = 'Happy-Birthday.png';
+
+      if (document.createEvent) {
+        var event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        a.dispatchEvent(event);
+      } else {
+        a.click();
+      }
+    };
+    image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+  }
+  /*function CreateImageBhoolku() {
     var svgString = new XMLSerializer().serializeToString(document.querySelector('#Bhoolku'));
     var canvas = document.getElementById("canvasbhoolku");
     var ctx = canvas.getContext("2d");
@@ -232,9 +284,36 @@
       a.click();
     };
     img.src = url;
-  }
+  }*/
+
 
   function CreateImageSadbhav() {
+    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Sadbhav'));
+    var canvas = document.createElement('canvas');
+    canvas.width = 1080; // Set desired width
+    canvas.height = 1920; // Set desired height
+    var ctx = canvas.getContext('2d');
+
+    var image = new Image();
+    image.onload = function () {
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      var png = canvas.toDataURL('image/png');
+
+      var a = document.createElement('a');
+      a.href = png;
+      a.download = 'Happy-Birthday.png';
+
+      if (document.createEvent) {
+        var event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        a.dispatchEvent(event);
+      } else {
+        a.click();
+      }
+    };
+    image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+  }
+  /*function CreateImageSadbhav() {
     var svgString = new XMLSerializer().serializeToString(document.querySelector('#Sadbhav'));
     var canvas = document.getElementById("canvassadbhav");
     var ctx = canvas.getContext("2d");
@@ -254,9 +333,36 @@
       a.click();
     };
     img.src = url;
-  }
+  }*/
+
 
   function CreateImageBlank() {
+    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Blank'));
+    var canvas = document.createElement('canvas');
+    canvas.width = 1080; // Set desired width
+    canvas.height = 1920; // Set desired height
+    var ctx = canvas.getContext('2d');
+
+    var image = new Image();
+    image.onload = function () {
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      var png = canvas.toDataURL('image/png');
+
+      var a = document.createElement('a');
+      a.href = png;
+      a.download = 'Happy-Birthday.png';
+
+      if (document.createEvent) {
+        var event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        a.dispatchEvent(event);
+      } else {
+        a.click();
+      }
+    };
+    image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+  }
+  /*function CreateImageBlank() {
     var svgString = new XMLSerializer().serializeToString(document.querySelector('#Blank'));
     var canvas = document.getElementById("canvasblank");
     var ctx = canvas.getContext("2d");
@@ -276,7 +382,7 @@
       a.click();
     };
     img.src = url;
-  }
+  }*/
 </script>
 
 <script>
