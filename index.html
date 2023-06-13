@@ -140,20 +140,21 @@
 <script src="js/bootstrap.min.js"></script>
 
 <script>
-  function CreateImageFriend() {
-    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Friend'));
-    var canvas = document.createElement('canvas');
-    canvas.width = 1080; // Set desired width
-    canvas.height = 1920; // Set desired height
-    var ctx = canvas.getContext('2d');
+function CreateImageFriend() {
+  var svgString = new XMLSerializer().serializeToString(document.querySelector('#Friend'));
+  var canvas = document.createElement('canvas');
+  canvas.width = 1080; // Set desired width
+  canvas.height = 1920; // Set desired height
+  var ctx = canvas.getContext('2d');
 
-    var image = new Image();
-    image.onload = function () {
-      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-      var png = canvas.toDataURL('image/png');
+  var image = new Image();
+  image.onload = function () {
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    canvas.toBlob(function (blob) {
+      var url = URL.createObjectURL(blob);
 
       var a = document.createElement('a');
-      a.href = png;
+      a.href = url;
       a.download = 'Happy-Birthday.png';
 
       if (document.createEvent) {
@@ -163,47 +164,61 @@
       } else {
         a.click();
       }
-    };
-    image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
-  }
+
+      URL.revokeObjectURL(url);
+    }, 'image/png');
+  };
+  image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+}
+
+
+function CreateImageElder() {
+  var svgString = new XMLSerializer().serializeToString(document.querySelector('#Elder'));
+  var canvas = document.createElement('canvas');
+  canvas.width = 1080; // Set desired width
+  canvas.height = 1920; // Set desired height
+  var ctx = canvas.getContext('2d');
+
+  var image = new Image();
+  image.onload = function () {
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    canvas.toBlob(function (blob) {
+      var url = URL.createObjectURL(blob);
+
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'Happy-Birthday.png';
+
+      if (document.createEvent) {
+        var event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        a.dispatchEvent(event);
+      } else {
+        a.click();
+      }
+
+      URL.revokeObjectURL(url);
+    }, 'image/png');
+  };
+  image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+}
+
   
-  
-  /*function CreateImageFriend() {
-    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Friend'));
-    var canvas = document.getElementById("canvasfriend");
-    var ctx = canvas.getContext("2d");
-    var DOMURL = self.URL || self.webkitURL || self;
-    var img = new Image();
-    var svg = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-    var url = DOMURL.createObjectURL(svg);
-    img.onload = function () {
-      ctx.drawImage(img, 0, 0);
-      var png = canvas.toDataURL("image/png");
-      document.querySelector('#png-friend').innerHTML = '<img src="' + png + '"/>';
-      DOMURL.revokeObjectURL(png);
+function CreateImageBhoolku() {
+  var svgString = new XMLSerializer().serializeToString(document.querySelector('#Bhoolku'));
+  var canvas = document.createElement('canvas');
+  canvas.width = 1080; // Set desired width
+  canvas.height = 1920; // Set desired height
+  var ctx = canvas.getContext('2d');
 
-      var a = document.createElement("a");
-      a.href = png;
-      a.download = "Happy-Birthday.png";
-      a.click();
-    };
-    img.src = url;
-  }*/
-
-  function CreateImageElder() {
-    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Elder'));
-    var canvas = document.createElement('canvas');
-    canvas.width = 1080; // Set desired width
-    canvas.height = 1920; // Set desired height
-    var ctx = canvas.getContext('2d');
-
-    var image = new Image();
-    image.onload = function () {
-      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-      var png = canvas.toDataURL('image/png');
+  var image = new Image();
+  image.onload = function () {
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    canvas.toBlob(function (blob) {
+      var url = URL.createObjectURL(blob);
 
       var a = document.createElement('a');
-      a.href = png;
+      a.href = url;
       a.download = 'Happy-Birthday.png';
 
       if (document.createEvent) {
@@ -213,45 +228,28 @@
       } else {
         a.click();
       }
-    };
-    image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
-  }
-  
-  /*function CreateImageElder() {
-    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Elder'));
-    var canvas = document.getElementById("canvaselder");
-    var ctx = canvas.getContext("2d");
-    var DOMURL = self.URL || self.webkitURL || self;
-    var img = new Image();
-    var svg = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-    var url = DOMURL.createObjectURL(svg);
-    img.onload = function () {
-      ctx.drawImage(img, 0, 0);
-      var png = canvas.toDataURL("image/png");
-      document.querySelector('#png-elder').innerHTML = '<img src="' + png + '"/>';
-      DOMURL.revokeObjectURL(png);
 
-      var a = document.createElement("a");
-      a.href = png;
-      a.download = "Happy-Birthday.png";
-      a.click();
-    };
-    img.src = url;
-  }*/
-  function CreateImageBhoolku() {
-    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Bhoolku'));
-    var canvas = document.createElement('canvas');
-    canvas.width = 1080; // Set desired width
-    canvas.height = 1920; // Set desired height
-    var ctx = canvas.getContext('2d');
+      URL.revokeObjectURL(url);
+    }, 'image/png');
+  };
+  image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+}
 
-    var image = new Image();
-    image.onload = function () {
-      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-      var png = canvas.toDataURL('image/png');
+function CreateImageSadbhav() {
+  var svgString = new XMLSerializer().serializeToString(document.querySelector('#Sadbhav'));
+  var canvas = document.createElement('canvas');
+  canvas.width = 1080; // Set desired width
+  canvas.height = 1920; // Set desired height
+  var ctx = canvas.getContext('2d');
+
+  var image = new Image();
+  image.onload = function () {
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    canvas.toBlob(function (blob) {
+      var url = URL.createObjectURL(blob);
 
       var a = document.createElement('a');
-      a.href = png;
+      a.href = url;
       a.download = 'Happy-Birthday.png';
 
       if (document.createEvent) {
@@ -261,46 +259,29 @@
       } else {
         a.click();
       }
-    };
-    image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
-  }
-  /*function CreateImageBhoolku() {
-    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Bhoolku'));
-    var canvas = document.getElementById("canvasbhoolku");
-    var ctx = canvas.getContext("2d");
-    var DOMURL = self.URL || self.webkitURL || self;
-    var img = new Image();
-    var svg = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-    var url = DOMURL.createObjectURL(svg);
-    img.onload = function () {
-      ctx.drawImage(img, 0, 0);
-      var png = canvas.toDataURL("image/png");
-      document.querySelector('#png-bhoolku').innerHTML = '<img src="' + png + '"/>';
-      DOMURL.revokeObjectURL(png);
 
-      var a = document.createElement("a");
-      a.href = png;
-      a.download = "Happy-Birthday.png";
-      a.click();
-    };
-    img.src = url;
-  }*/
+      URL.revokeObjectURL(url);
+    }, 'image/png');
+  };
+  image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+}
 
 
-  function CreateImageSadbhav() {
-    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Sadbhav'));
-    var canvas = document.createElement('canvas');
-    canvas.width = 1080; // Set desired width
-    canvas.height = 1920; // Set desired height
-    var ctx = canvas.getContext('2d');
+function CreateImageBlank() {
+  var svgString = new XMLSerializer().serializeToString(document.querySelector('#Blank'));
+  var canvas = document.createElement('canvas');
+  canvas.width = 1080; // Set desired width
+  canvas.height = 1920; // Set desired height
+  var ctx = canvas.getContext('2d');
 
-    var image = new Image();
-    image.onload = function () {
-      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-      var png = canvas.toDataURL('image/png');
+  var image = new Image();
+  image.onload = function () {
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    canvas.toBlob(function (blob) {
+      var url = URL.createObjectURL(blob);
 
       var a = document.createElement('a');
-      a.href = png;
+      a.href = url;
       a.download = 'Happy-Birthday.png';
 
       if (document.createEvent) {
@@ -310,79 +291,12 @@
       } else {
         a.click();
       }
-    };
-    image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
-  }
-  /*function CreateImageSadbhav() {
-    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Sadbhav'));
-    var canvas = document.getElementById("canvassadbhav");
-    var ctx = canvas.getContext("2d");
-    var DOMURL = self.URL || self.webkitURL || self;
-    var img = new Image();
-    var svg = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-    var url = DOMURL.createObjectURL(svg);
-    img.onload = function () {
-      ctx.drawImage(img, 0, 0);
-      var png = canvas.toDataURL("image/png");
-      document.querySelector('#png-sadbhav').innerHTML = '<img src="' + png + '"/>';
-      DOMURL.revokeObjectURL(png);
 
-      var a = document.createElement("a");
-      a.href = png;
-      a.download = "Happy-Birthday.png";
-      a.click();
-    };
-    img.src = url;
-  }*/
-
-
-  function CreateImageBlank() {
-    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Blank'));
-    var canvas = document.createElement('canvas');
-    canvas.width = 1080; // Set desired width
-    canvas.height = 1920; // Set desired height
-    var ctx = canvas.getContext('2d');
-
-    var image = new Image();
-    image.onload = function () {
-      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-      var png = canvas.toDataURL('image/png');
-
-      var a = document.createElement('a');
-      a.href = png;
-      a.download = 'Happy-Birthday.png';
-
-      if (document.createEvent) {
-        var event = document.createEvent('MouseEvents');
-        event.initEvent('click', true, true);
-        a.dispatchEvent(event);
-      } else {
-        a.click();
-      }
-    };
-    image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
-  }
-  /*function CreateImageBlank() {
-    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Blank'));
-    var canvas = document.getElementById("canvasblank");
-    var ctx = canvas.getContext("2d");
-    var DOMURL = self.URL || self.webkitURL || self;
-    var img = new Image();
-    var svg = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-    var url = DOMURL.createObjectURL(svg);
-    img.onload = function () {
-      ctx.drawImage(img, 0, 0);
-      var png = canvas.toDataURL("image/png");
-      document.querySelector('#png-blank').innerHTML = '<img src="' + png + '"/>';
-      DOMURL.revokeObjectURL(png);
-
-      var a = document.createElement("a");
-      a.href = png;
-      a.download = "Happy-Birthday.png";
-      a.click();
-    };
-    img.src = url;
-  }*/
+      URL.revokeObjectURL(url);
+    }, 'image/png');
+  };
+  image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+}
 </script>
 
 <script>
