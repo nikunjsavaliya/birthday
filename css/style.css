@@ -19,6 +19,15 @@
          url('../fonts/HammersmithOneRegular.ttf') format('truetype'),
          url('../fonts/HammersmithOneRegular.svg#HammersmithOneRegular') format('svg');
 }
+@font-face {
+    font-family: 'LexendVariableFont_wght';
+    src: url('../fonts/LexendVariableFont_wght.eot');
+    src: url('../fonts/LexendVariableFont_wght.eot') format('embedded-opentype'),
+         url('../fonts/LexendVariableFont_wght.woff2') format('woff2'),
+         url('../fonts/LexendVariableFont_wght.woff') format('woff'),
+         url('../fonts/LexendVariableFont_wght.ttf') format('truetype'),
+         url('../fonts/LexendVariableFont_wght.svg#LexendVariableFont_wght') format('svg');
+}
 
 
 svg {
