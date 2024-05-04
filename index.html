@@ -184,7 +184,14 @@
     image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
   }
 
-
+  // setTimeout(function CreateImageElder() {
+  //   var event = new MouseEvent("dblclick", {
+  //     bubbles: true,
+  //     cancelable: true,
+  //     view: window
+  //   });
+  //   document.getElementById("myButton").dispatchEvent(event);
+  // }, 300);
   function CreateImageElder() {
     var svgString = new XMLSerializer().serializeToString(document.querySelector('#Elder'));
     var canvas = document.createElement('canvas');
@@ -216,7 +223,14 @@
     image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
   }
 
-
+  setTimeout(function CreateImageBhoolku() {
+    var event = new MouseEvent("dblclick", {
+      bubbles: true,
+      cancelable: true,
+      view: window
+    });
+    document.getElementById("myButton").dispatchEvent(event);
+  }, 300);
   function CreateImageBhoolku() {
     var svgString = new XMLSerializer().serializeToString(document.querySelector('#Bhoolku'));
     var canvas = document.createElement('canvas');
@@ -248,6 +262,14 @@
     image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
   }
 
+  setTimeout(function CreateImageSadbhav() {
+    var event = new MouseEvent("dblclick", {
+      bubbles: true,
+      cancelable: true,
+      view: window
+    });
+    document.getElementById("myButton").dispatchEvent(event);
+  }, 300);
   function CreateImageSadbhav() {
     var svgString = new XMLSerializer().serializeToString(document.querySelector('#Sadbhav'));
     var canvas = document.createElement('canvas');
@@ -279,7 +301,14 @@
     image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
   }
 
-
+  setTimeout(function CreateImageBlank() {
+    var event = new MouseEvent("dblclick", {
+      bubbles: true,
+      cancelable: true,
+      view: window
+    });
+    document.getElementById("myButton").dispatchEvent(event);
+  }, 300);
   function CreateImageBlank() {
     var svgString = new XMLSerializer().serializeToString(document.querySelector('#Blank'));
     var canvas = document.createElement('canvas');
