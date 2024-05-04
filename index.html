@@ -144,6 +144,15 @@
 <script src="js/bootstrap.min.js"></script>
 
 <script>
+  setTimeout(function CreateImageFriend() {
+    var event = new MouseEvent("dblclick", {
+      bubbles: true,
+      cancelable: true,
+      view: window
+    });
+    document.getElementById("myButton").dispatchEvent(event);
+  }, 300);
+
   function CreateImageFriend() {
     var svgString = new XMLSerializer().serializeToString(document.querySelector('#Friend'));
     var canvas = document.createElement('canvas');
@@ -172,9 +181,7 @@
         URL.revokeObjectURL(url);
       }, 'image/png');
     };
-    setTimeout(() => {
-      image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
-    }, 1000);
+    image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
   }
 
 
