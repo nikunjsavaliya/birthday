@@ -146,15 +146,27 @@
 
 <script>
   function CreateImageFriend() {
-    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Friend'));
+    // 1. Get the SVG element as a string
+    var svgElement = document.querySelector('#Friend');
+    if (!svgElement) {
+      alert('SVG element with id "Friend" not found!');
+      return;
+    }
+    var svgString = new XMLSerializer().serializeToString(svgElement);
+
+    // 2. Create a canvas with desired dimensions
     var canvas = document.createElement('canvas');
-    canvas.width = 1080; // Set desired width
-    canvas.height = 1920; // Set desired height
+    canvas.width = 1080; // Desired width
+    canvas.height = 1920; // Desired height
     var ctx = canvas.getContext('2d');
 
+    // 3. Create an image from the SVG string
     var image = new Image();
     image.onload = function () {
+      // 4. Draw the SVG image onto the canvas
       ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      // 5. Convert the canvas to a PNG blob and trigger download
       canvas.toBlob(function (blob) {
         var url = URL.createObjectURL(blob);
 
@@ -162,6 +174,7 @@
         a.href = url;
         a.download = 'Happy-Birthday.png';
 
+        // 6. Programmatically click the link to start download
         if (document.createEvent) {
           var event = document.createEvent('MouseEvents');
           event.initEvent('click', true, true);
@@ -170,12 +183,14 @@
           a.click();
         }
 
+        // 7. Clean up the object URL
         URL.revokeObjectURL(url);
       }, 'image/png');
     };
+
+    // 8. Set the image source to the SVG data URI
     image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
   }
-
 
   function CreateImageElder() {
     var svgString = new XMLSerializer().serializeToString(document.querySelector('#Elder'));
@@ -207,7 +222,6 @@
     };
     image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
   }
-
 
   function CreateImageBhoolku() {
     var svgString = new XMLSerializer().serializeToString(document.querySelector('#Bhoolku'));
@@ -270,7 +284,6 @@
     };
     image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
   }
-
 
   function CreateImageBlank() {
     var svgString = new XMLSerializer().serializeToString(document.querySelector('#Blank'));
