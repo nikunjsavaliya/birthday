@@ -146,34 +146,77 @@
 
 <script>
   function CreateImageFriend() {
-    var svgString = new XMLSerializer().serializeToString(document.querySelector('#Friend'));
-    var canvas = document.createElement('canvas');
-    canvas.width = 1080; // Set desired width
-    canvas.height = 1920; // Set desired height
-    var ctx = canvas.getContext('2d');
+    const svg = document.querySelector('#Friend');
+    const canvas = document.createElement('canvas');
+    canvas.width = 1080;
+    canvas.height = 1920;
+    const ctx = canvas.getContext('2d');
 
-    var image = new Image();
-    image.onload = function () {
-      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-      canvas.toBlob(function (blob) {
-        var url = URL.createObjectURL(blob);
+    // Detect all <image> tags inside SVG
+    const images = svg.querySelectorAll('image');
+    let loaded = 0;
 
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = 'Happy-Birthday.png';
+    // If no <image> tag, just render immediately
+    if (images.length === 0) {
+      renderSVG();
+      return;
+    }
 
-        if (document.createEvent) {
-          var event = document.createEvent('MouseEvents');
-          event.initEvent('click', true, true);
-          a.dispatchEvent(event);
-        } else {
-          a.click();
+    // Preload all images in the SVG
+    images.forEach(img => {
+      const href = img.getAttribute('href') || img.getAttribute('xlink:href');
+      if (!href) {
+        loaded++;
+        return;
+      }
+      const tempImg = new Image();
+      tempImg.crossOrigin = "anonymous";
+      tempImg.onload = function () {
+        loaded++;
+        if (loaded === images.length) {
+          renderSVG();
         }
+      };
+      tempImg.onerror = function () {
+        loaded++;
+        if (loaded === images.length) {
+          renderSVG();
+        }
+      };
+      tempImg.src = href;
+    });
 
-        URL.revokeObjectURL(url);
-      }, 'image/png');
-    };
-    image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+    function renderSVG() {
+      // Give Safari time to decode
+      setTimeout(() => {
+        const svgString = new XMLSerializer().serializeToString(svg);
+        const image = new Image();
+        image.crossOrigin = "anonymous";
+
+        image.onload = function () {
+          ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+          canvas.toBlob(function (blob) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Happy-Birthday.png';
+
+            if (document.createEvent) {
+              const event = document.createEvent('MouseEvents');
+              event.initEvent('click', true, true);
+              a.dispatchEvent(event);
+            } else {
+              a.click();
+            }
+
+            URL.revokeObjectURL(url);
+          }, 'image/png');
+        };
+
+        image.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+      }, 300); // Safari needs small delay
+    }
   }
 
 
